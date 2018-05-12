@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var graphqlHTTP = require('express-graphql');
 const fileUpload = require('express-fileupload');
+var cors = require('cors');
 var {
   buildSchema
 } = require('graphql');
@@ -40,7 +41,7 @@ const app = express();
 
 app.use(fileUpload());
 /*request is passed as context by default */
-app.use('/graphql', graphqlHTTP((req) => ({
+app.use('/graphql', cors() ,graphqlHTTP((req) => ({
   schema: Schema,
   rootValue: resolvers,
   pretty: true,
